@@ -77,34 +77,44 @@ const cars = [
 
 const CarCarousel = () => {
   return (
-    <section data-navbar-color="dark" className="h-screen bg-black text-white flex flex-col justify-center items-center">
+    <section 
+      data-navbar-color="dark" 
+      className="h-screen bg-gray-600 text-white flex flex-col justify-center items-center overflow-hidden"
+    >
       <h2 className="text-4xl font-bold mb-8 text-center">Our Luxury Fleet</h2>
 
       <div className="w-full max-w-6xl px-4">
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
-          spaceBetween={30}
+          modules={[Navigation,Autoplay]}
+          spaceBetween={10}
           slidesPerView={1}
-          breakpoints={{
-            640: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          centeredSlides={true}
+          grabCursor={true}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
           loop={true}
+          navigation={{ enabled: true }}
+          breakpoints={{
+            640: { slidesPerView: 1.2, spaceBetween: 15 },
+            768: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
+          }}
         >
           {cars.map((car, index) => (
             <SwiperSlide key={index}>
-              <div className="bg-white text-black rounded-lg overflow-hidden shadow-lg">
-                <Image src={car.image} alt={car.name} width={500} height={300} className="w-full h-56 object-cover" />
+              <div className="bg-white text-black rounded-lg overflow-hidden shadow-lg transform transition hover:scale-105">
+                <Image 
+                  src={car.image} 
+                  alt={car.name} 
+                  width={500} 
+                  height={300} 
+                  className="w-full h-56 object-cover"
+                />
                 <div className="p-4">
                   <h3 className="text-xl font-bold">{car.name}</h3>
                   <p className="text-sm">🏎 {car.hp} | 🚀 {car.zeroToSixty} | 🔝 {car.topSpeed}</p>
                   <p className="text-lg font-semibold mt-2">{car.price}</p>
                   <Link href="/book">
-                    <button className="mt-4 w-full bg-black text-white py-2 rounded-md transition hover:bg-gray-900">
+                    <button className="mt-4 w-full bg-gray-600 text-white py-2 rounded-md transition hover:bg-gray-900">
                       BOOK NOW
                     </button>
                   </Link>
