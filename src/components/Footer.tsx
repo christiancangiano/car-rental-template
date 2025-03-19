@@ -7,28 +7,28 @@ import { FaFacebook, FaInstagram, FaXTwitter, FaYoutube, FaLinkedin, FaTiktok } 
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-10 px-6 md:px-12 w-full">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between">
+      <div className="max-w-7xl mx-auto flex flex-col items-center md:items-start md:flex-row justify-between text-center md:text-left space-y-8 md:space-y-0">
         
         {/* Left Side: Logo & Contact Info */}
-        <div className="flex flex-col space-y-6">
+        <div className="flex flex-col space-y-4 items-center md:items-start">
           <Image src="/assets/nonamewhite.svg" alt="Company Logo" width={150} height={50} priority />
-          <div>
-            <p className="text-gray-400">Email: <a href="mailto:contact@nonameexotics.com" className="text-blue-400 hover:underline">contact@nonameexotics.com</a></p>
-            <p className="text-gray-400">Hours: 8:00 AM - 7:00 PM</p>
+          <div className="text-gray-400">
+            <p>Email: <a href="mailto:contact@nonameexotics.com" className="text-blue-400 hover:underline">contact@nonameexotics.com</a></p>
+            <p>Hours: 8:00 AM - 7:00 PM</p>
           </div>
         </div>
 
         {/* Center: Locations */}
-        <div className="flex flex-col md:flex-row gap-10 text-sm mt-6 md:mt-0">
+        <div className="flex flex-col md:flex-row gap-8 text-sm">
           {/* NYC Location */}
-          <div className="text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start">
             <h3 className="text-lg font-semibold text-white">New York Location</h3>
             <p className="text-gray-400">410 Park Ave, New York, NY 10022</p>
             <p className="text-gray-400">Phone: (212) 555-7890</p>
           </div>
 
           {/* LA Location */}
-          <div className="text-center md:text-left">
+          <div className="flex flex-col items-center md:items-start">
             <h3 className="text-lg font-semibold text-white">Los Angeles Location</h3>
             <p className="text-gray-400">8423 Wilshire Blvd, Beverly Hills, CA 90211</p>
             <p className="text-gray-400">Phone: (310) 555-1234</p>

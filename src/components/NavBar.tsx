@@ -9,7 +9,7 @@ import "@/app/fonts.css";
 const Navbar = () => {
   const [scrollDirection, setScrollDirection] = useState("up");
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [navbarColor] = useState("transparent");
+  const [navbarColor, setNavbarColor] = useState("transparent");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showServicesMenu, setShowServicesMenu] = useState(false);
   const [showAboutMenu, setShowAboutMenu] = useState(false);
@@ -24,10 +24,11 @@ const Navbar = () => {
       setIsAtTop(currentScrollY === 0);
 
       if (currentScrollY > lastScrollY) {
-        setScrollDirection("down");
+        setScrollDirection("down"); // Hide navbar when scrolling down
       } else {
-        setScrollDirection("up");
+        setScrollDirection("up"); // Show navbar when scrolling up
       }
+
       setLastScrollY(currentScrollY);
     };
 
@@ -36,11 +37,25 @@ const Navbar = () => {
   }, [lastScrollY, showMobileMenu]);
 
   useEffect(() => {
-    if (showMobileMenu) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const bgColor = entry.target.getAttribute("data-navbar-color");
+            setNavbarColor(bgColor || "transparent");
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    document.querySelectorAll("section").forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = showMobileMenu ? "hidden" : "";
   }, [showMobileMenu]);
 
   const handleCloseMenu = () => {
@@ -105,7 +120,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {showMobileMenu && (
           <>
@@ -121,14 +135,14 @@ const Navbar = () => {
               animate={{ x: "0%" }}
               exit={{ x: "-100%" }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed top-0 left-0 h-screen w-full bg-black text-white z-50 flex flex-col py-10 px-6"
+              className="fixed top-0 left-0 h-screen w-full bg-gray-900 text-white z-50 flex flex-col py-10 px-6"
             >
               <button className="absolute top-4 right-6 text-xl" onClick={handleCloseMenu}>
                 ✕
               </button>
 
               {!showServicesMenu && !showAboutMenu ? (
-                <nav className="mt-8 flex flex-col space-y-6 text-lg font-semibold">
+                <nav className="mt-8 flex flex-col space-y-6 text-lg font-semibold text-left">
                   <button onClick={() => { router.push("/"); handleCloseMenu(); }}>Home</button>
                   <button onClick={() => setShowServicesMenu(true)}>Services</button>
                   <button onClick={() => setShowAboutMenu(true)}>About Us</button>
@@ -138,26 +152,15 @@ const Navbar = () => {
                   </button>
                 </nav>
               ) : showServicesMenu ? (
-                <motion.div className="mt-8 flex flex-col gap-6">
-                  <button className="text-left text-lg font-semibold mb-6" onClick={() => setShowServicesMenu(false)}>← Back</button>
-                  <div className="grid grid-cols-1 gap-4">
-                    <button onClick={() => { router.push("/services/newyork"); handleCloseMenu(); }} className="w-full">
-                      <Image src="/nyc.png" alt="New York Services" width={600} height={300} className="w-full rounded-lg" />
-                      <h3 className="text-xl font-bold text-center mt-2">New York Services</h3>
-                    </button>
-                    <button onClick={() => { router.push("/services/los-angeles"); handleCloseMenu(); }} className="w-full">
-                      <Image src="/la.png" alt="Los Angeles Services" width={600} height={300} className="w-full rounded-lg" />
-                      <h3 className="text-xl font-bold text-center mt-2">Los Angeles Services</h3>
-                    </button>
-                  </div>
+                <motion.div className="mt-8 flex flex-col space-y-6 text-left">
+                  <button onClick={() => setShowServicesMenu(false)}>← Back</button>
+                  <button onClick={() => { router.push("/services/newyork"); handleCloseMenu(); }}>New York Services</button>
+                  <button onClick={() => { router.push("/services/losangeles"); handleCloseMenu(); }}>Los Angeles Services</button>
                 </motion.div>
               ) : (
-                <motion.div className="mt-8 flex flex-col gap-6">
-                  <button className="text-left text-lg font-semibold mb-6" onClick={() => setShowAboutMenu(false)}>← Back</button>
+                <motion.div className="mt-8 flex flex-col space-y-6 text-left">
+                  <button onClick={() => setShowAboutMenu(false)}>← Back</button>
                   <button onClick={() => { router.push("/about-us"); handleCloseMenu(); }}>About Us</button>
-                  <button onClick={() => { router.push("/faq"); handleCloseMenu(); }}>FAQ</button>
-                  <button onClick={() => { router.push("/terms"); handleCloseMenu(); }}>Terms & Conditions</button>
-                  <button onClick={() => { router.push("/privacy"); handleCloseMenu(); }}>Privacy Policy</button>
                 </motion.div>
               )}
             </motion.div>

@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Footer from "@/components/Footer";
-import { Link } from "react-scroll"; 
 
 const cars = [
   { 
@@ -69,33 +68,22 @@ const NewYork = () => {
       {/* Hero Section with NYC Background */}
       <section 
         id="hero"
-        className="min-h-screen flex flex-col items-center px-6 py-12 w-full bg-[url('/nyc.png')] bg-cover bg-center bg-no-repeat"
+        className="min-h-screen flex flex-col items-center px-6 pt-32 md:pt-40 pb-12 w-full bg-[url('/nyc.png')] bg-cover bg-center bg-no-repeat"
       >
-        <div className="h-20"></div>
-        <h1 className="text-5xl font-bold text-white mb-6 h-30 text-center bg-black/50 px-6 py-3 rounded-lg">
+        <h1 className="text-5xl font-bold text-white mb-10 md:mb-12 text-center px-6 py-3 rounded-lg">
           Luxury Car Rentals in New York
         </h1>
 
-        <p className="text-lg text-white max-w-3xl text-center mb-8 bg-black/50 p-4 rounded-lg">
+        <p className="text-lg text-white max-w-md md:max-w-3xl text-center mb-10 bg-black/50 p-4 rounded-lg">
           Experience the thrill of driving the world's most exclusive vehicles through the streets of Manhattan, 
           Brooklyn, and beyond. Our fleet offers the finest selection of luxury and exotic cars for rent, 
           perfect for special occasions, business events, or simply indulging in a high-performance ride.
         </p>
 
-        <p className="text-lg text-white max-w-3xl text-center mb-8 bg-black/50 p-4 rounded-lg">
+        <p className="text-lg text-white max-w-md md:max-w-3xl text-center mb-12 bg-black/50 p-4 rounded-lg">
           We offer door-to-door delivery, chauffeur services, and custom rental packages tailored to your needs. 
           Whether you're looking for a weekend getaway or an extended luxury rental, we've got you covered.
         </p>
-
-        {/* Smooth Scroll Buttons */}
-        <div className="flex space-x-4">
-          <Link to="services" smooth={true} duration={800} className="cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-            Explore Services
-          </Link>
-          <Link to="cars" smooth={true} duration={800} className="cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-            View Cars
-          </Link>
-        </div>
       </section>
 
       {/* Services Section */}
