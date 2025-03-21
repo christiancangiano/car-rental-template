@@ -65,10 +65,10 @@ const cars = [
 const NewYork = () => {
   return (
     <>
-      {/* Hero Section with NYC Background */}
+  
       <section 
         id="hero"
-        className="min-h-screen flex flex-col items-center px-6 pt-32 md:pt-40 pb-12 w-full bg-[url('/nyc.png')] bg-cover bg-center bg-no-repeat"
+        className="min-h-screen flex flex-col items-center px-6 pt-32 md:pt-40 pb-12 w-full bg-[url('/pinkghost.png')] unoptimized bg-cover bg-center bg-no-repeat"
       >
         <h1 className="text-5xl font-bold text-white mb-10 md:mb-12 text-center px-6 py-3 rounded-lg">
           Luxury Car Rentals in New York
@@ -86,7 +86,6 @@ const NewYork = () => {
         </p>
       </section>
 
-      {/* Services Section */}
       <section id="services" className="bg-gray-700 py-12 px-6 w-full">
         <h2 className="text-4xl font-bold text-blue-400 text-center mb-6">Our Exclusive Services</h2>
 
@@ -108,11 +107,10 @@ const NewYork = () => {
         </div>
       </section>
 
-      {/* Available Cars Section */}
       <section id="cars" className="bg-gray-600 px-6 py-12 w-full">
         <h2 className="text-4xl font-bold text-blue-500 text-center mb-8">Available Cars</h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
           {cars.map((car, index) => (
             <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105">
               <Image src={car.image} alt={car.name} width={400} height={300} className="w-full h-56 object-cover" />
@@ -120,7 +118,6 @@ const NewYork = () => {
                 <h3 className="text-xl font-semibold text-gray-800">{car.name}</h3>
                 <p className="text-gray-600">{car.price}</p>
 
-                {/* Performance Specs */}
                 <div className="mt-3 text-gray-700">
                   <p><strong>HP:</strong> {car.horsepower}</p>
                   <p><strong>0-60:</strong> {car.zeroToSixty}</p>

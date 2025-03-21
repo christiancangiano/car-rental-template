@@ -24,9 +24,9 @@ const Navbar = () => {
       setIsAtTop(currentScrollY === 0);
 
       if (currentScrollY > lastScrollY) {
-        setScrollDirection("down"); // Hide navbar when scrolling down
+        setScrollDirection("down"); 
       } else {
-        setScrollDirection("up"); // Show navbar when scrolling up
+        setScrollDirection("up"); 
       }
 
       setLastScrollY(currentScrollY);
@@ -100,10 +100,10 @@ const Navbar = () => {
             <div className="relative group">
               <button className="text-[0.75rem]">ABOUT US</button>
               <div className="absolute left-0 mt-2 w-40 bg-black text-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                <button onClick={() => router.push("/about-us")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">About Us</button>
+                <button onClick={() => router.push("./aboutus")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">About Us</button>
                 <button onClick={() => router.push("/faq")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">FAQ</button>
-                <button onClick={() => router.push("/terms")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Terms & Conditions</button>
-                <button onClick={() => router.push("/privacy")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Privacy Policy</button>
+                <button onClick={() => router.push("/termsandconditions")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Terms & Conditions</button>
+                <button onClick={() => router.push("/privacypolicy")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Privacy Policy</button>
               </div>
             </div>
 
@@ -153,14 +153,26 @@ const Navbar = () => {
                 </nav>
               ) : showServicesMenu ? (
                 <motion.div className="mt-8 flex flex-col space-y-6 text-left">
-                  <button onClick={() => setShowServicesMenu(false)}>← Back</button>
-                  <button onClick={() => { router.push("/services/newyork"); handleCloseMenu(); }}>New York Services</button>
-                  <button onClick={() => { router.push("/services/losangeles"); handleCloseMenu(); }}>Los Angeles Services</button>
+                <h1 className="flex flex-box text-xl justify-center h-20 p-6">Our Services</h1>
+                <button onClick={() => { router.push("/services/newyork"); handleCloseMenu(); }} className="flex items-center space-x-4">
+                <Image src="/nyc.png" alt="New York Services" width={200} height={200} className="rounded-md" />
+                <span>New York Services</span>
+                                        </button>
+                <button onClick={() => { router.push("/services/losangeles"); handleCloseMenu(); }} className="flex items-center space-x-4">
+                <Image src="/hollywood.png" alt="Los Angeles Services" width={200} height={200} className="rounded-md" />
+                    <span>Los Angeles Services</span>
+                    </button> 
+                    <div>
+                </div>
+                <button onClick={() => setShowServicesMenu(false)} className="bg-white text-black px-4 py-2 rounded-md mt-4">← Back</button>
                 </motion.div>
-              ) : (
+                ) : (
                 <motion.div className="mt-8 flex flex-col space-y-6 text-left">
-                  <button onClick={() => setShowAboutMenu(false)}>← Back</button>
-                  <button onClick={() => { router.push("/about-us"); handleCloseMenu(); }}>About Us</button>
+                  <button onClick={() => { router.push("/aboutus"); handleCloseMenu(); }}>About Us</button>
+                  <button onClick={() => { router.push("/faq"); handleCloseMenu(); }}>FAQ</button>
+                  <button onClick={() => { router.push("/termsandconditions"); handleCloseMenu(); }}>Terms & Conditions</button>
+                  <button onClick={() => { router.push("/privacypolicy"); handleCloseMenu(); }}>Privacy Policy</button>
+                  <button onClick={() => setShowAboutMenu(false)} className="bg-white text-black px-4 py-2 rounded-md mt-4">← Back</button>
                 </motion.div>
               )}
             </motion.div>

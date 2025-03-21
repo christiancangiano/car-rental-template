@@ -21,6 +21,14 @@ const cars = [
     topSpeed: "193 mph"
   },
   { 
+    name: "Mclaren 720s", 
+    price: "$1,500/day", 
+    image: "/mclaren720.png",
+    horsepower: "710 HP", 
+    zeroToSixty: "2.8 sec", 
+    topSpeed: "212 mph"
+  },
+  { 
     name: "Mercedes Benz GT R", 
     price: "$1,000/day", 
     image: "/amggtr3.png",
@@ -47,7 +55,7 @@ const cars = [
   { 
     name: "Bentley Continental GT", 
     price: "$1,100/day", 
-    image: "/bentley.png",
+    image: "/bentley2.png",
     horsepower: "650 HP", 
     zeroToSixty: "3.5 sec", 
     topSpeed: "208 mph"
@@ -56,10 +64,33 @@ const cars = [
     name: "Mercedes Maybach GLS 600", 
     price: "$1,200/day", 
     image: "/maybach600.png",
-    objectFit:"contain",
     horsepower: "550 HP", 
     zeroToSixty: "4.8 sec", 
     topSpeed: "130 mph"
+  },
+  { 
+    name: "Mercedes G63 AMG", 
+    price: "$1,500/day", 
+    image: "/gwagon.png",
+    horsepower: "577 HP", 
+    zeroToSixty: "4.2 sec", 
+    topSpeed: "149 mph"
+  },
+  { 
+    name: "Tesla Model S Plaid", 
+    price: "$1,200/day", 
+    image: "/modelsplaid.png",
+    horsepower: "1020 HP", 
+    zeroToSixty: "1.9 sec", 
+    topSpeed: "200 mph"
+  },
+  { 
+    name: "Hellcat Widebody Jailbreak", 
+    price: "$900/day", 
+    image: "/srt.png",
+    horsepower: "717 HP", 
+    zeroToSixty: "3.4 sec", 
+    topSpeed: "203 mph"
   },
 ];
 
@@ -67,10 +98,10 @@ const LosAngeles = () => {
   return (
     <>
       <section 
-        className="min-h-screen flex flex-col items-center px-6 py-16 md:py-20 w-full bg-[url('/la.png')] bg-cover bg-center bg-no-repeat"
+        className="min-h-screen flex flex-col items-center px-6 py-16 md:py-20 w-full bg-[url('/amggtr3.png')] bg-cover bg-center bg-no-repeat"
       >
         <div className="h-25"></div>
-        <h1 className="text-5xl font-bold text-blue-500 mb-8 text-center">Luxury Car Rentals in Los Angeles</h1>
+        <h1 className="text-5xl font-bold text-white mb-8 text-center">Luxury Car Rentals in Los Angeles</h1>
 
         <p className="text-lg text-white max-w-3xl text-center mb-12 md:mb-16 bg-black/50 p-4 rounded-lg">
           Experience the thrill of driving the world's most exclusive vehicles through the streets of Beverly Hills, 
@@ -108,7 +139,8 @@ const LosAngeles = () => {
       <section className="bg-gray-600 px-6 py-12 w-full">
         <h2 className="text-4xl font-bold text-blue-500 text-center mb-8">Available Cars</h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
+        {/* ✅ FIXED: Stacked on Mobile, Grid on Desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
           {cars.map((car, index) => (
             <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105">
               <Image src={car.image} alt={car.name} width={400} height={300} className="w-full h-56 object-cover" />
