@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation,Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -113,8 +113,8 @@ const CarCarousel = () => {
                   <h3 className="text-xl font-bold">{car.name}</h3>
                   <p className="text-sm">🏎 {car.hp} | 🚀 {car.zeroToSixty} | 🔝 {car.topSpeed}</p>
                   <p className="text-lg font-semibold mt-2">{car.price}</p>
-                  <Link href="/book">
-                    <button className="mt-4 w-full bg-gray-600 text-white py-2 rounded-md transition hover:bg-gray-900">
+                  <Link href="/booknow">
+                    <button className="mt-4 w-full bg-red-700 text-white py-2 rounded-md transition hover:bg-red-900">
                       BOOK NOW
                     </button>
                   </Link>

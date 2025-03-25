@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const cars = [
   { 
@@ -116,7 +117,7 @@ const LosAngeles = () => {
       </section>
       
       <section className="bg-gray-700 py-12 px-6 w-full">
-        <h2 className="text-4xl font-bold text-blue-400 text-center mb-6">Our Exclusive Services</h2>
+        <h2 className="text-4xl font-bold text-white text-center mb-6">Our Exclusive Services</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
@@ -139,7 +140,7 @@ const LosAngeles = () => {
       <section className="bg-gray-600 px-6 py-12 w-full">
         <h2 className="text-4xl font-bold text-blue-500 text-center mb-8">Available Cars</h2>
 
-        {/* ✅ FIXED: Stacked on Mobile, Grid on Desktop */}
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
           {cars.map((car, index) => (
             <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105">
@@ -148,15 +149,16 @@ const LosAngeles = () => {
                 <h3 className="text-xl font-semibold text-gray-800">{car.name}</h3>
                 <p className="text-gray-600">{car.price}</p>
 
-                <div className="mt-3 text-gray-700">
+                <div className="mt-3 text-black">
                   <p><strong>HP:</strong> {car.horsepower}</p>
                   <p><strong>0-60:</strong> {car.zeroToSixty}</p>
                   <p><strong>Top Speed:</strong> {car.topSpeed}</p>
                 </div>
-
-                <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
-                  Book Now
+                <Link href="/booknow">
+                    <button className="mt-4 bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-900 transition">
+                    Book Now
                 </button>
+                </Link>
               </div>
             </div>
           ))}

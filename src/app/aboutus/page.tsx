@@ -22,7 +22,7 @@ const AboutUs = () => {
         <div className="absolute inset-0 bg-opacity-50" />
         
         <h1 className="relative text-5xl md:text-6xl font-bold text-white text-center px-4">
-          HOW WE STARTED
+          ABOUT US
         </h1>
       </section>
 
@@ -38,7 +38,7 @@ const AboutUs = () => {
           </p>
 
           <p>
-            Within a year, we expanded our fleet and became <strong>New York City’s most sought-after exotic car rental service.</strong>
+            Within a year, we expanded our fleet and became <strong>New York Citys most sought after exotic car rental service.</strong>
             Celebrities, business executives, and car enthusiasts alike trusted us for their luxury transportation needs.
           </p>
 

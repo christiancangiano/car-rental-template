@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="flex flex-col space-y-4 items-center md:items-start">
           <Image src="/assets/nonamewhite.svg" alt="Company Logo" width={150} height={50} priority />
           <div className="text-gray-400">
-            <p>Email: <a href="mailto:contact@nonameexotics.com" className="text-blue-400 hover:underline">contact@nonameexotics.com</a></p>
+            <p>Email: <a href="mailto:contact@nonameexotics.com" className="text-red-500 hover:underline">contact@nonameexotics.com</a></p>
             <p>Hours: 8:00 AM - 7:00 PM</p>
           </div>
         </div>
@@ -24,14 +24,14 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-lg font-semibold text-white">New York Location</h3>
             <p className="text-gray-400">410 Park Ave, New York, NY 10022</p>
-            <p className="text-gray-400">Phone: (212) 555-7890</p>
+            <p className="text-gray-400">Phone: <span className="text-red-500">(212) 555-7890</span></p>
           </div>
 
           {/* LA Location */}
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-lg font-semibold text-white">Los Angeles Location</h3>
             <p className="text-gray-400">8423 Wilshire Blvd, Beverly Hills, CA 90211</p>
-            <p className="text-gray-400">Phone: (310) 555-1234</p>
+            <p className="text-gray-400">Phone:<span className="text-red-500">(310) 555-1234</span> </p>
           </div>
         </div>
 

@@ -64,8 +64,8 @@ const Contact = () => {
     <>
     <div className=" h-10 bg-gray-800"/>
    
-      <section className="bg-gray-800 px-6 py-16 md:py-20 text-white flex flex-col items-center">
-        <h2 className="text-4xl font-bold text-center mb-6">We’d Love to Hear From You</h2>
+      <section className="bg-gray-700 px-6 py-16 md:py-20 text-white flex flex-col items-center">
+        <h2 className="text-4xl font-bold text-center mb-6">We Would Love to Hear From You</h2>
         <p className="text-white text-center max-w-2xl mb-8">
           Whether you have a question about rentals, services, or anything else, our team is ready to answer all your inquiries.
         </p>
@@ -85,7 +85,7 @@ const Contact = () => {
               name="name" 
               value={formData.name} 
               onChange={handleChange} 
-              className={`w-full px-4 py-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+              className={`w-full px-4 py-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition ${
                 errors.name ? "border-red-500 border" : "border-none"
               }`}
               placeholder="Enter your name"
@@ -101,7 +101,7 @@ const Contact = () => {
               name="email" 
               value={formData.email} 
               onChange={handleChange} 
-              className={`w-full px-4 py-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition ${
+              className={`w-full px-4 py-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition ${
                 errors.email ? "border-red-500 border" : "border-none"
               }`}
               placeholder="Enter your email"
@@ -116,7 +116,7 @@ const Contact = () => {
               name="message" 
               value={formData.message} 
               onChange={handleChange} 
-              className={`w-full h-32 px-4 py-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition resize-none ${
+              className={`w-full h-32 px-4 py-3 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition resize-none ${
                 errors.message ? "border-red-500 border" : "border-none"
               }`}
               placeholder="Write your message..."
@@ -127,7 +127,7 @@ const Contact = () => {
        
           <button 
             type="submit" 
-            className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition"
+            className="w-full bg-red-500 text-white py-3 rounded-md font-semibold hover:bg-green-700 transition"
           >
             Send Message
           </button>
@@ -140,7 +140,7 @@ const Contact = () => {
               transition={{ duration: 0.3 }}
               className="text-green-500 text-sm mt-4 text-center"
             >
-              Message sent successfully! We’ll get back to you soon.
+              Message sent successfully! We will get back to you soon.
             </motion.p>
           )}
         </motion.form>

@@ -7,6 +7,9 @@ import TestimonialCarousel from "@/components/TestimonialCarousel";
 import Footer from "@/components/Footer"; 
 import Link from "next/link";
 
+// 2025 Designed and built by Christian Cangiano
+// Not an actual business only intended as a template and portfolio showcase
+
 
 const HomePage = () => {
   return (
@@ -19,7 +22,6 @@ const HomePage = () => {
         }
       `}</style>
 
-    
       <section data-navbar-color="light" className="relative min-h-screen flex items-center justify-center bg-white overflow-hidden w-full">
         <Image
           src="/greensto.png"

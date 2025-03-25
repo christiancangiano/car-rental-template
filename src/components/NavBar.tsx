@@ -6,6 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import "@/app/fonts.css";
 
+// 2025 Designed and built by Christian Cangiano
+// Not an actual business only intended as a template and portfolio showcase
+
 const Navbar = () => {
   const [scrollDirection, setScrollDirection] = useState("up");
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -76,7 +79,7 @@ const Navbar = () => {
         }`}
       >
         <div className="flex items-center justify-between w-full lg:hidden py-3">
-          <button onClick={() => router.push("/book")} className="text-xs font-medium">
+          <button onClick={() => router.push("/booknow")} className="text-xs font-medium">
             BOOK NOW
           </button>
           <Image src={logoSrc} alt="Logo" width={110} height={45} priority />
@@ -93,14 +96,14 @@ const Navbar = () => {
               <button className="text-[0.75rem]">SERVICES</button>
               <div className="absolute left-0 mt-2 w-32 bg-black text-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
                 <button onClick={() => router.push("/services/newyork")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">New York</button>
-                <button onClick={() => router.push("/services/los-angeles")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Los Angeles</button>
+                <button onClick={() => router.push("/services/losangeles")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Los Angeles</button>
               </div>
             </div>
 
             <div className="relative group">
               <button className="text-[0.75rem]">ABOUT US</button>
               <div className="absolute left-0 mt-2 w-40 bg-black text-white shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition-opacity">
-                <button onClick={() => router.push("./aboutus")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">About Us</button>
+                <button onClick={() => router.push("/aboutus")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">About Us</button>
                 <button onClick={() => router.push("/faq")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">FAQ</button>
                 <button onClick={() => router.push("/termsandconditions")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Terms & Conditions</button>
                 <button onClick={() => router.push("/privacypolicy")} className="block px-4 py-2 hover:bg-gray-700 w-full text-left">Privacy Policy</button>
@@ -114,7 +117,7 @@ const Navbar = () => {
             <Image src={logoSrc} alt="Logo" width={140} height={60} priority />
           </div>
 
-          <button onClick={() => router.push("/book")} className="text-[0.75rem] font-medium">
+          <button onClick={() => router.push("/booknow")} className="text-[0.75rem] font-medium">
             BOOK NOW
           </button>
         </div>
@@ -135,7 +138,7 @@ const Navbar = () => {
               animate={{ x: "0%" }}
               exit={{ x: "-100%" }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed top-0 left-0 h-screen w-full bg-gray-900 text-white z-50 flex flex-col py-10 px-6"
+              className="fixed top-0 left-0 h-screen w-full bg-gray-700 text-white z-50 flex flex-col py-10 px-6"
             >
               <button className="absolute top-4 right-6 text-xl" onClick={handleCloseMenu}>
                 ✕
@@ -147,7 +150,7 @@ const Navbar = () => {
                   <button onClick={() => setShowServicesMenu(true)}>Services</button>
                   <button onClick={() => setShowAboutMenu(true)}>About Us</button>
                   <button onClick={() => router.push("/contact")}>Contact</button>
-                  <button onClick={() => { router.push("/book"); handleCloseMenu(); }} className="bg-white text-black px-4 py-2 rounded-md mt-4">
+                  <button onClick={() => { router.push("/booknow"); handleCloseMenu(); }} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">
                     BOOK NOW
                   </button>
                 </nav>
@@ -164,7 +167,7 @@ const Navbar = () => {
                     </button> 
                     <div>
                 </div>
-                <button onClick={() => setShowServicesMenu(false)} className="bg-white text-black px-4 py-2 rounded-md mt-4">← Back</button>
+                <button onClick={() => setShowServicesMenu(false)} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">← Back</button>
                 </motion.div>
                 ) : (
                 <motion.div className="mt-8 flex flex-col space-y-6 text-left">
@@ -172,7 +175,7 @@ const Navbar = () => {
                   <button onClick={() => { router.push("/faq"); handleCloseMenu(); }}>FAQ</button>
                   <button onClick={() => { router.push("/termsandconditions"); handleCloseMenu(); }}>Terms & Conditions</button>
                   <button onClick={() => { router.push("/privacypolicy"); handleCloseMenu(); }}>Privacy Policy</button>
-                  <button onClick={() => setShowAboutMenu(false)} className="bg-white text-black px-4 py-2 rounded-md mt-4">← Back</button>
+                  <button onClick={() => setShowAboutMenu(false)} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">← Back</button>
                 </motion.div>
               )}
             </motion.div>

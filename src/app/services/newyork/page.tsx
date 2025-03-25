@@ -124,7 +124,7 @@ const NewYork = () => {
                   <p><strong>Top Speed:</strong> {car.topSpeed}</p>
                 </div>
 
-                <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
+                <button className="mt-4 bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
                   Book Now
                 </button>
               </div>
