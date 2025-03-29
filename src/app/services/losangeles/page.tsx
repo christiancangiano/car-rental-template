@@ -146,7 +146,7 @@ const LosAngeles = () => {
       </section>
 
       <section className="bg-gray-600 px-6 py-12 w-full">
-        <h2 className="text-4xl font-bold text-blue-500 text-center mb-8">Available Cars</h2>
+        <h2 className="text-4xl font-bold text-white text-center mb-8">Available Cars</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
           {cars.map((car, index) => (

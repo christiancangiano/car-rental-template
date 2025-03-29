@@ -106,8 +106,9 @@ const HomePage = () => {
       </section>
 
       {/* Partners Section */}
+      <div className="h-30 bg-white"/>
       <section className="min-h-screen flex flex-col items-center justify-center bg-white px-4 w-full overflow-hidden">
-        <h2 className="text-5xl font-bold mb-6 h-20 text-black text-center">Our Partners</h2>
+        <h2 className="text-5xl font-bold mb-6 h-40 text-black text-center">Our Partners</h2>
         <div className="flex flex-wrap justify-center gap-8">
           <div className="relative h-24 w-36 sm:h-28 sm:w-40 md:h-32 md:w-48">
             <Image
@@ -182,6 +183,7 @@ const HomePage = () => {
             />
           </div>
         </div>
+        <div className="h-10 bg-white"/>
       </section>
 
       <Footer />

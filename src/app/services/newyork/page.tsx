@@ -87,7 +87,7 @@ const NewYork = () => {
       </section>
 
       <section id="services" className="bg-gray-700 py-12 px-6 w-full">
-        <h2 className="text-4xl font-bold text-blue-400 text-center mb-6">Our Exclusive Services</h2>
+        <h2 className="text-4xl font-bold text-white text-center mb-6">Our Exclusive Services</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
@@ -114,7 +114,7 @@ const NewYork = () => {
       </section>
 
       <section id="cars" className="bg-gray-600 px-6 py-12 w-full">
-        <h2 className="text-4xl font-bold text-blue-500 text-center mb-8">Available Cars</h2>
+        <h2 className="text-4xl font-bold text-white text-center mb-8">Available Cars</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
           {cars.map((car, index) => (

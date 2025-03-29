@@ -27,9 +27,9 @@ const Navbar = () => {
       setIsAtTop(currentScrollY === 0);
 
       if (currentScrollY > lastScrollY) {
-        setScrollDirection("down"); 
+        setScrollDirection("down");
       } else {
-        setScrollDirection("up"); 
+        setScrollDirection("up");
       }
 
       setLastScrollY(currentScrollY);
@@ -53,7 +53,6 @@ const Navbar = () => {
     );
 
     document.querySelectorAll("section").forEach((section) => observer.observe(section));
-
     return () => observer.disconnect();
   }, []);
 
@@ -67,15 +66,26 @@ const Navbar = () => {
     setShowAboutMenu(false);
   };
 
-  const logoSrc = isAtTop ? "/assets/nonamewhite.svg" : navbarColor === "light" ? "/assets/nonameblack.svg" : "/assets/nonamewhite.svg";
+  const logoSrc =
+    isAtTop || navbarColor !== "light"
+      ? "/assets/nonamewhite.svg"
+      : "/assets/nonameblack.svg";
 
   return (
     <>
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition duration-500 backdrop-blur-lg flex items-center justify-between px-6 h-14 ${
-          showMobileMenu ? "translate-y-0" : scrollDirection === "down" ? "-translate-y-full" : "translate-y-0"
+          showMobileMenu || isAtTop
+            ? "translate-y-0"
+            : scrollDirection === "down"
+            ? "-translate-y-full"
+            : "translate-y-0"
         } ${
-          isAtTop ? "bg-transparent text-white" : navbarColor === "light" ? "bg-white text-black" : "bg-black text-white"
+          isAtTop
+            ? "bg-transparent text-white"
+            : navbarColor === "light"
+            ? "bg-white text-black"
+            : "bg-black text-white"
         }`}
       >
         <div className="flex items-center justify-between w-full lg:hidden py-3">
@@ -138,46 +148,106 @@ const Navbar = () => {
               animate={{ x: "0%" }}
               exit={{ x: "-100%" }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed top-0 left-0 h-screen w-full bg-gray-700 text-white z-50 flex flex-col py-10 px-6"
+              className="fixed top-0 left-0 h-screen w-full bg-gray-700 text-white z-50 flex flex-col py-10 px-6 overflow-y-auto"
             >
               <button className="absolute top-4 right-6 text-xl" onClick={handleCloseMenu}>
                 ✕
               </button>
 
-              {!showServicesMenu && !showAboutMenu ? (
-                <nav className="mt-8 flex flex-col space-y-6 text-lg font-semibold text-left">
-                  <button onClick={() => { router.push("/"); handleCloseMenu(); }}>Home</button>
-                  <button onClick={() => setShowServicesMenu(true)}>Services</button>
-                  <button onClick={() => setShowAboutMenu(true)}>About Us</button>
-                  <button onClick={() => { router.push("/contact"); handleCloseMenu(); }}>Contact</button>
-                  <button onClick={() => { router.push("/booknow"); handleCloseMenu(); }} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">
-                    BOOK NOW
-                  </button>
-                </nav>
-              ) : showServicesMenu ? (
-                <motion.div className="mt-8 flex flex-col space-y-6 text-left">
-                <h1 className="flex flex-box text-xl justify-center h-20 p-6">Our Services</h1>
-                <button onClick={() => { router.push("/services/newyork"); handleCloseMenu(); }} className="flex items-center space-x-4">
-                <Image src="/nyc.png" alt="New York Services" width={200} height={200} className="rounded-md" />
-                <span>New York Services</span>
-                                        </button>
-                <button onClick={() => { router.push("/services/losangeles"); handleCloseMenu(); }} className="flex items-center space-x-4">
-                <Image src="/hollywood.png" alt="Los Angeles Services" width={200} height={200} className="rounded-md" />
-                    <span>Los Angeles Services</span>
-                    </button> 
-                    <div>
-                </div>
-                <button onClick={() => setShowServicesMenu(false)} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">← Back</button>
-                </motion.div>
+              <AnimatePresence mode="wait">
+                {!showServicesMenu && !showAboutMenu ? (
+                  <motion.nav
+                    key="mainMenu"
+                    className="mt-8 flex flex-col space-y-6 text-lg font-semibold text-left"
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={{
+                      hidden: {},
+                      visible: {
+                        transition: { staggerChildren: 0.1 },
+                      },
+                      exit: {
+                        transition: { staggerChildren: 0.05, staggerDirection: -1 },
+                      },
+                    }}
+                  >
+                    {["Home", "Services", "About Us", "Contact"].map((label, idx) => (
+                      <motion.button
+                        key={idx}
+                        variants={{
+                          hidden: { opacity: 0, x: -30 },
+                          visible: { opacity: 1, x: 0 },
+                          exit: { opacity: 0, x: -30 },
+                        }}
+                        onClick={() => {
+                          if (label === "Home") router.push("/");
+                          if (label === "Contact") router.push("/contact");
+                          if (label === "Services") setShowServicesMenu(true);
+                          if (label === "About Us") setShowAboutMenu(true);
+                          if (label === "Home" || label === "Contact") handleCloseMenu();
+                        }}
+                      >
+                        {label}
+                      </motion.button>
+                    ))}
+
+                    <motion.button
+                      variants={{
+                        hidden: { opacity: 0, y: 10 },
+                        visible: { opacity: 1, y: 0 },
+                        exit: { opacity: 0, y: 10 },
+                      }}
+                      onClick={() => {
+                        router.push("/booknow");
+                        handleCloseMenu();
+                      }}
+                      className="bg-red-500 text-white px-4 py-2 rounded-md mt-4"
+                    >
+                      BOOK NOW
+                    </motion.button>
+                  </motion.nav>
+                ) : showServicesMenu ? (
+                  <motion.div
+                    key="servicesMenu"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-8 flex flex-col space-y-6 text-left"
+                  >
+                    <h1 className="flex text-xl justify-center h-20 p-6">Our Services</h1>
+                    <button onClick={() => { router.push("/services/newyork"); handleCloseMenu(); }} className="flex items-center space-x-4">
+                      <Image src="/nyc.png" alt="New York Services" width={200} height={200} className="rounded-md" />
+                      <span>New York Services</span>
+                    </button>
+                    <button onClick={() => { router.push("/services/losangeles"); handleCloseMenu(); }} className="flex items-center space-x-4">
+                      <Image src="/hollywood.png" alt="Los Angeles Services" width={200} height={200} className="rounded-md" />
+                      <span>Los Angeles Services</span>
+                    </button>
+                    <button onClick={() => setShowServicesMenu(false)} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">
+                      ← Back
+                    </button>
+                  </motion.div>
                 ) : (
-                <motion.div className="mt-8 flex flex-col space-y-6 text-left">
-                  <button onClick={() => { router.push("/aboutus"); handleCloseMenu(); }}>About Us</button>
-                  <button onClick={() => { router.push("/faq"); handleCloseMenu(); }}>FAQ</button>
-                  <button onClick={() => { router.push("/termsandconditions"); handleCloseMenu(); }}>Terms & Conditions</button>
-                  <button onClick={() => { router.push("/privacypolicy"); handleCloseMenu(); }}>Privacy Policy</button>
-                  <button onClick={() => setShowAboutMenu(false)} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">← Back</button>
-                </motion.div>
-              )}
+                  <motion.div
+                    key="aboutMenu"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -50 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-8 flex flex-col space-y-6 text-left"
+                  >
+                    <button onClick={() => { router.push("/aboutus"); handleCloseMenu(); }}>About Us</button>
+                    <button onClick={() => { router.push("/faq"); handleCloseMenu(); }}>FAQ</button>
+                    <button onClick={() => { router.push("/termsandconditions"); handleCloseMenu(); }}>Terms & Conditions</button>
+                    <button onClick={() => { router.push("/privacypolicy"); handleCloseMenu(); }}>Privacy Policy</button>
+                    <button onClick={() => setShowAboutMenu(false)} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">
+                      ← Back
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           </>
         )}
