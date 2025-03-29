@@ -16,7 +16,7 @@ const TermsAndConditions = () => {
           <p>To rent a vehicle from Noname Exotics, you must:</p>
           <ul className="list-disc list-inside">
             <li>Be at least <strong>25 years old</strong> (drivers under 25 may be subject to additional fees).</li>
-            <li>Hold a valid, government-issued driver’s license.</li>
+            <li>Hold a valid, government-issued drivers license.</li>
             <li>Provide proof of full-coverage insurance that extends to rental vehicles.</li>
             <li>Present a major credit card for the security deposit.</li>
           </ul>

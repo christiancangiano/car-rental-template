@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const cars = [
   { 
@@ -65,7 +66,6 @@ const cars = [
 const NewYork = () => {
   return (
     <>
-  
       <section 
         id="hero"
         className="min-h-screen flex flex-col items-center px-6 pt-32 md:pt-40 pb-12 w-full bg-[url('/pinkghost.png')] unoptimized bg-cover bg-center bg-no-repeat"
@@ -75,14 +75,14 @@ const NewYork = () => {
         </h1>
 
         <p className="text-lg text-white max-w-md md:max-w-3xl text-center mb-10 bg-black/50 p-4 rounded-lg">
-          Experience the thrill of driving the world's most exclusive vehicles through the streets of Manhattan, 
+          Experience the thrill of driving the world&#39;s most exclusive vehicles through the streets of Manhattan, 
           Brooklyn, and beyond. Our fleet offers the finest selection of luxury and exotic cars for rent, 
           perfect for special occasions, business events, or simply indulging in a high-performance ride.
         </p>
 
         <p className="text-lg text-white max-w-md md:max-w-3xl text-center mb-12 bg-black/50 p-4 rounded-lg">
           We offer door-to-door delivery, chauffeur services, and custom rental packages tailored to your needs. 
-          Whether you're looking for a weekend getaway or an extended luxury rental, we've got you covered.
+          Whether you&#39;re looking for a weekend getaway or an extended luxury rental, we&#39;ve got you covered.
         </p>
       </section>
 
@@ -92,17 +92,23 @@ const NewYork = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold mb-3">Chauffeur Service</h3>
-            <p className="text-gray-300">Luxury transportation with a professional driver. Arrive in style and comfort anywhere in New York City.</p>
+            <p className="text-gray-300">
+              Luxury transportation with a professional driver. Arrive in style and comfort anywhere in New York City.
+            </p>
           </div>
 
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold mb-3">VIP Airport Pickup</h3>
-            <p className="text-gray-300">Experience first-class airport pickup with our premium car service, perfect for executives and celebrities.</p>
+            <p className="text-gray-300">
+              Experience first-class airport pickup with our premium car service, perfect for executives and celebrities.
+            </p>
           </div>
 
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold mb-3">Custom Rental Packages</h3>
-            <p className="text-gray-300">Personalized luxury experiences with tailored rental packages, including multi-day rentals and exotic car tours.</p>
+            <p className="text-gray-300">
+              Personalized luxury experiences with tailored rental packages, including multi-day rentals and exotic car tours.
+            </p>
           </div>
         </div>
       </section>
@@ -112,10 +118,21 @@ const NewYork = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
           {cars.map((car, index) => (
-            <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105">
-              <Image src={car.image} alt={car.name} width={400} height={300} className="w-full h-56 object-cover" />
+            <div
+              key={index}
+              className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105"
+            >
+              <Image 
+                src={car.image} 
+                alt={car.name} 
+                width={400} 
+                height={300} 
+                className="w-full h-56 object-cover" 
+              />
               <div className="p-4 text-center">
-                <h3 className="text-xl font-semibold text-gray-800">{car.name}</h3>
+                <h3 className="text-xl font-semibold text-gray-800">
+                  {car.name}
+                </h3>
                 <p className="text-gray-600">{car.price}</p>
 
                 <div className="mt-3 text-gray-700">
@@ -124,9 +141,11 @@ const NewYork = () => {
                   <p><strong>Top Speed:</strong> {car.topSpeed}</p>
                 </div>
 
-                <button className="mt-4 bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
-                  Book Now
-                </button>
+                <Link href="/booknow">
+                  <button className="mt-4 bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-900 transition">
+                    Book Now
+                  </button>
+                </Link>
               </div>
             </div>
           ))}

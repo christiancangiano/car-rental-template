@@ -149,7 +149,7 @@ const Navbar = () => {
                   <button onClick={() => { router.push("/"); handleCloseMenu(); }}>Home</button>
                   <button onClick={() => setShowServicesMenu(true)}>Services</button>
                   <button onClick={() => setShowAboutMenu(true)}>About Us</button>
-                  <button onClick={() => router.push("/contact")}>Contact</button>
+                  <button onClick={() => { router.push("/contact"); handleCloseMenu(); }}>Contact</button>
                   <button onClick={() => { router.push("/booknow"); handleCloseMenu(); }} className="bg-red-500 text-white px-4 py-2 rounded-md mt-4">
                     BOOK NOW
                   </button>

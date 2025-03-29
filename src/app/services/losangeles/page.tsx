@@ -102,17 +102,19 @@ const LosAngeles = () => {
         className="min-h-screen flex flex-col items-center px-6 py-16 md:py-20 w-full bg-[url('/amggtr3.png')] bg-cover bg-center bg-no-repeat"
       >
         <div className="h-25"></div>
-        <h1 className="text-5xl font-bold text-white mb-8 text-center">Luxury Car Rentals in Los Angeles</h1>
+        <h1 className="text-5xl font-bold text-white mb-8 text-center">
+          Luxury Car Rentals in Los Angeles
+        </h1>
 
         <p className="text-lg text-white max-w-3xl text-center mb-12 md:mb-16 bg-black/50 p-4 rounded-lg">
-          Experience the thrill of driving the world's most exclusive vehicles through the streets of Beverly Hills, 
+          Experience the thrill of driving the world&#39;s most exclusive vehicles through the streets of Beverly Hills, 
           Hollywood, and beyond. Our fleet offers the finest selection of luxury and exotic cars for rent, 
           perfect for special occasions, business events, or simply indulging in a high-performance ride.
         </p>
 
         <p className="text-lg text-white max-w-3xl text-center mb-12 md:mb-16 bg-black/50 p-4 rounded-lg">
           We offer door-to-door delivery, chauffeur services, and custom rental packages tailored to your needs. 
-          Whether you're looking for a weekend getaway or an extended luxury rental, we've got you covered.
+          Whether you&#39;re looking for a weekend getaway or an extended luxury rental, we&#39;ve got you covered.
         </p>
       </section>
       
@@ -122,17 +124,23 @@ const LosAngeles = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold mb-3">Chauffeur Service</h3>
-            <p className="text-gray-300">Luxury transportation with a professional driver. Arrive in style and comfort anywhere in Los Angeles.</p>
+            <p className="text-gray-300">
+              Luxury transportation with a professional driver. Arrive in style and comfort anywhere in Los Angeles.
+            </p>
           </div>
 
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold mb-3">VIP Airport Pickup</h3>
-            <p className="text-gray-300">Experience first-class airport pickup with our premium car service, perfect for executives and celebrities.</p>
+            <p className="text-gray-300">
+              Experience first-class airport pickup with our premium car service, perfect for executives and celebrities.
+            </p>
           </div>
 
           <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg">
             <h3 className="text-2xl font-semibold mb-3">Custom Rental Packages</h3>
-            <p className="text-gray-300">Personalized luxury experiences with tailored rental packages, including multi-day rentals and exotic car tours.</p>
+            <p className="text-gray-300">
+              Personalized luxury experiences with tailored rental packages, including multi-day rentals and exotic car tours.
+            </p>
           </div>
         </div>
       </section>
@@ -140,24 +148,38 @@ const LosAngeles = () => {
       <section className="bg-gray-600 px-6 py-12 w-full">
         <h2 className="text-4xl font-bold text-blue-500 text-center mb-8">Available Cars</h2>
 
-        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
           {cars.map((car, index) => (
-            <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105">
-              <Image src={car.image} alt={car.name} width={400} height={300} className="w-full h-56 object-cover" />
+            <div
+              key={index}
+              className="bg-white shadow-lg rounded-lg overflow-hidden transform transition hover:scale-105"
+            >
+              <Image
+                src={car.image}
+                alt={car.name}
+                width={400}
+                height={300}
+                className="w-full h-56 object-cover"
+              />
               <div className="p-4 text-center">
                 <h3 className="text-xl font-semibold text-gray-800">{car.name}</h3>
                 <p className="text-gray-600">{car.price}</p>
 
                 <div className="mt-3 text-black">
-                  <p><strong>HP:</strong> {car.horsepower}</p>
-                  <p><strong>0-60:</strong> {car.zeroToSixty}</p>
-                  <p><strong>Top Speed:</strong> {car.topSpeed}</p>
+                  <p>
+                    <strong>HP:</strong> {car.horsepower}
+                  </p>
+                  <p>
+                    <strong>0-60:</strong> {car.zeroToSixty}
+                  </p>
+                  <p>
+                    <strong>Top Speed:</strong> {car.topSpeed}
+                  </p>
                 </div>
                 <Link href="/booknow">
-                    <button className="mt-4 bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-900 transition">
+                  <button className="mt-4 bg-red-700 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-900 transition">
                     Book Now
-                </button>
+                  </button>
                 </Link>
               </div>
             </div>

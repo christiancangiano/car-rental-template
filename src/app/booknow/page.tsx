@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Footer from "@/components/Footer";
 
@@ -36,10 +36,10 @@ const losAngelesCars: CarOption[] = [
 // Extra fees
 const DELIVERY_FEE = 100;
 const AIRPORT_PICKUP_FEE = 50;
-const UNDER_25_SURCHARGE_RATE = 0.20;
+const UNDER_25_SURCHARGE_RATE = 0.2;
 const MILEAGE_FEE_PER_MILE = 0.5;
 
-// Step transitions
+// Framer Motion step variants
 const stepVariants = {
   hidden: { opacity: 0, x: 50 },
   visible: { opacity: 1, x: 0 },
@@ -47,16 +47,15 @@ const stepVariants = {
 };
 
 const Book = () => {
-
-  // Current step (1 or 2)
+  // Current step: 1 or 2
   const [step, setStep] = useState(1);
 
-  // Step 1 state
+  // Step 1 fields
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [licenseNumber, setLicenseNumber] = useState("");
 
-  // Step 2 state
+  // Step 2 fields
   const [location, setLocation] = useState("New York");
   const [selectedCar, setSelectedCar] = useState<CarOption | null>(null);
   const [startDate, setStartDate] = useState("");
@@ -70,27 +69,28 @@ const Book = () => {
   const [airportPickup, setAirportPickup] = useState(false);
   const [estimatedCost, setEstimatedCost] = useState(0);
 
-  // Reset selectedCar if location changes
+  // If location changes, reset the selected car
   useEffect(() => {
     setSelectedCar(null);
   }, [location]);
 
-  // Calculate rental days
-  const getRentalDays = (): number => {
+  // Calculate rental days with useCallback
+  const getRentalDays = useCallback((): number => {
     if (!startDate || !endDate) return 0;
     const start = new Date(startDate);
     const end = new Date(endDate);
     const diff = end.getTime() - start.getTime();
     const days = Math.ceil(diff / (1000 * 3600 * 24));
     return days > 0 ? days : 0;
-  };
+  }, [startDate, endDate]);
 
-  // Calculate total cost
-  const calculateCost = (): number => {
+  const calculateCost = useCallback((): number => {
     const rentalDays = getRentalDays();
     if (!selectedCar || rentalDays === 0) return 0;
-    let baseCost = selectedCar.price * rentalDays;
+  
+    const baseCost = selectedCar.price * rentalDays;
     let extras = 0;
+  
     if (driverAge < 25) {
       extras += baseCost * UNDER_25_SURCHARGE_RATE;
     }
@@ -101,18 +101,34 @@ const Book = () => {
       extras += AIRPORT_PICKUP_FEE;
     }
     extras += estimatedMiles * MILEAGE_FEE_PER_MILE;
+  
     return baseCost + extras;
-  };
+  }, [
+    getRentalDays,
+    selectedCar,
+    driverAge,
+    delivery,
+    airportPickup,
+    estimatedMiles
+  ]);
 
-  // Recalculate cost whenever relevant fields change
+  // Recompute cost whenever relevant fields change
   useEffect(() => {
     setEstimatedCost(calculateCost());
-  }, [selectedCar, startDate, endDate, driverAge, delivery, airportPickup, estimatedMiles]);
+  }, [
+    calculateCost,
+    selectedCar,
+    startDate,
+    endDate,
+    driverAge,
+    delivery,
+    airportPickup,
+    estimatedMiles
+  ]);
 
   // Step 1 submission
   const handleStep1Submit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Basic validation for Step 1
     if (!fullName.trim()) {
       alert("Full name is required");
       return;
@@ -122,22 +138,20 @@ const Book = () => {
       return;
     }
     if (!licenseNumber.trim()) {
-      alert("Driver's license number is required");
+      alert("Driver&#39;s license number is required");
       return;
     }
-    // If valid, move to Step 2
     setStep(2);
   };
 
   // Step 2 submission
   const handleStep2Submit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Additional validation for age
     if (driverAge < 21) {
       alert("Drivers must be at least 21.");
       return;
     }
-    // Confirm final booking
+
     alert(`
 Booking submitted.
 
@@ -147,10 +161,9 @@ License: ${licenseNumber}
 Estimated cost: $${estimatedCost.toFixed(2)}
 `);
     // Possibly reset or route user
-    // router.push("/thank-you-page"); or setStep(1);
   };
 
-  // Render Step 1
+  // Step 1
   const renderStep1 = () => (
     <motion.div
       key="step1"
@@ -162,6 +175,7 @@ Estimated cost: $${estimatedCost.toFixed(2)}
     >
       <h2 className="text-2xl font-bold mb-6 text-white">Step 1: Basic Info</h2>
       <form onSubmit={handleStep1Submit}>
+        {/* Full Name */}
         <div className="mb-6">
           <label className="block text-white mb-2">Full Name</label>
           <input
@@ -172,6 +186,8 @@ Estimated cost: $${estimatedCost.toFixed(2)}
             placeholder="Your Name"
           />
         </div>
+
+        {/* Email */}
         <div className="mb-6">
           <label className="block text-white mb-2">Email</label>
           <input
@@ -180,11 +196,12 @@ Estimated cost: $${estimatedCost.toFixed(2)}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Your Email"
-            
           />
         </div>
+
+        {/* Driver's License */}
         <div className="mb-6">
-          <label className="block text-white mb-2">Driver's License Number</label>
+          <label className="block text-white mb-2">Driver&#39;s License Number</label>
           <input
             type="text"
             className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -204,7 +221,7 @@ Estimated cost: $${estimatedCost.toFixed(2)}
     </motion.div>
   );
 
-  // Render Step 2
+  // Step 2
   const renderStep2 = () => (
     <motion.div
       key="step2"
@@ -216,7 +233,7 @@ Estimated cost: $${estimatedCost.toFixed(2)}
     >
       <h2 className="text-2xl font-bold mb-6 text-white">Step 2: Booking Details</h2>
       <form onSubmit={handleStep2Submit}>
-        {/* Location Selection */}
+        {/* Pickup Location */}
         <div className="mb-6">
           <label className="block text-white mb-2">Pickup Location</label>
           <select
@@ -233,7 +250,7 @@ Estimated cost: $${estimatedCost.toFixed(2)}
         <div className="mb-6">
           <label className="block text-white mb-2">Select Car</label>
           <select
-            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gren-500"
+            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
             value={selectedCar ? selectedCar.name : ""}
             onChange={(e) => {
               const carName = e.target.value;
@@ -251,7 +268,7 @@ Estimated cost: $${estimatedCost.toFixed(2)}
           </select>
         </div>
 
-        {/* Rental Duration */}
+        {/* Rental Dates */}
         <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-white mb-2">Start Date</label>
@@ -273,7 +290,7 @@ Estimated cost: $${estimatedCost.toFixed(2)}
           </div>
         </div>
 
-        {/* Driver Age & City */}
+        {/* Driver Info */}
         <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-white mb-2">Driver Age</label>
@@ -285,7 +302,9 @@ Estimated cost: $${estimatedCost.toFixed(2)}
               onChange={(e) => setDriverAge(Number(e.target.value))}
             />
             {driverAge < 21 && (
-              <p className="text-red-500 text-sm mt-1">Drivers must be at least 21.</p>
+              <p className="text-red-500 text-sm mt-1">
+                Drivers must be at least 21.
+              </p>
             )}
           </div>
           <div>
@@ -300,7 +319,7 @@ Estimated cost: $${estimatedCost.toFixed(2)}
           </div>
         </div>
 
-        {/* Travel Information */}
+        {/* Travel Info */}
         <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-center">
             <input
@@ -336,7 +355,9 @@ Estimated cost: $${estimatedCost.toFixed(2)}
             </label>
             {delivery && (
               <div>
-                <label className="block text-white text-sm mb-1">Preferred Delivery Time</label>
+                <label className="block text-white text-sm mb-1">
+                  Preferred Delivery Time
+                </label>
                 <input
                   type="time"
                   className="px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -372,7 +393,6 @@ Estimated cost: $${estimatedCost.toFixed(2)}
         >
           Submit Booking
         </button>
-        
       </form>
     </motion.div>
   );
@@ -380,7 +400,6 @@ Estimated cost: $${estimatedCost.toFixed(2)}
   return (
     <>
       {/* Main Container */}
-      <div className="h-10 bg-gray-700"/>
       <section className="min-h-screen flex flex-col items-center bg-gray-600 px-6 py-12">
         <h1 className="text-5xl font-bold mb-4 text-white text-center">
           Book Now
@@ -392,8 +411,6 @@ Estimated cost: $${estimatedCost.toFixed(2)}
         <AnimatePresence mode="wait">
           {step === 1 && renderStep1()}
           {step === 2 && renderStep2()}
-
-          
         </AnimatePresence>
       </section>
 

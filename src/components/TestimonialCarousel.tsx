@@ -37,7 +37,8 @@ const TestimonialCarousel = () => {
             <FaStar key={i} className="text-yellow-500 text-xl" />
           ))}
         </div>
-        <p className="text-lg text-black italic">"{testimonials[index].review}"</p>
+        {/* Replaced unescaped quotes with &quot; */}
+        <p className="text-lg text-black italic">&quot;{testimonials[index].review}&quot;</p>
         <h3 className="mt-4 text-xl text-black font-semibold">{testimonials[index].name}</h3>
       </motion.div>
     </div>
